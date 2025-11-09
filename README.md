@@ -71,3 +71,60 @@ Refine form layout, improve responsiveness, and handle validation messages clear
 5. Conclusion
 
 The NCC Cadet Form Automation System is designed to simplify data submission and record keeping for cadets. While the form input and user interface are functional, the PDF generation in Nepali and automated storage in Drive remain pending. Completing these tasks will fully automate the workflow, reduce manual errors, and provide a professional, standardized record for each cadet.
+
+Proposed System Update: Database-Driven Form Generation
+1. Current Limitation
+
+Currently, the system aims to save each cadet’s form as a file in Google Drive. This has some challenges:
+
+Manual management of files becomes cumbersome as the number of cadets grows.
+
+Searching or retrieving a specific cadet’s form requires navigating Drive folders.
+
+Integration and automation with Drive APIs can be error-prone.
+
+2. Proposed Solution
+
+Instead of saving generated forms directly to Drive, we can:
+
+Store cadet data in a database (e.g., MySQL, PostgreSQL).
+
+Generate forms on-demand:
+
+When needed, the system fetches a cadet’s data from the database.
+
+Generates a formal PDF form dynamically (e.g., using jsPDF or PHP libraries like TCPDF).
+
+Print or download:
+
+Users/admins can directly print the form or download it as a PDF without storing multiple static files.
+
+3. Advantages
+
+Centralized storage: All cadet data is stored in one place (the database).
+
+Easy search and retrieval: Forms can be generated for any cadet instantly.
+
+Reduced storage needs: No need to maintain separate files for each submission.
+
+Better scalability: Works for hundreds or thousands of cadets without clutter.
+
+Dynamic updates: If cadet data changes, the latest form is generated every time.
+
+Professional workflow: Aligns with modern data management best practices.
+
+4. Implementation Outline
+
+Database Design:
+
+Table cadets with columns: id, name, dob, province, district, training_details, contact_info, etc.
+
+Form Generation:
+
+Fetch data using a query like SELECT * FROM cadets WHERE id = ?.
+
+Fill the form template dynamically.
+
+Export as PDF using jsPDF (front-end) or TCPDF / FPDF (back-end).
+
+Optional: Add a web interface where admins can search cadets and generate/download their forms
